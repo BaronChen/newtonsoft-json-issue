@@ -15,7 +15,7 @@ namespace ConsoleApp1
             serializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             var testString = @"{
-                ""derivedObjectWithArray"": {
+                ""objectWithArray"": {
                     items: [
                     {
                         text: ""test 1""
@@ -26,7 +26,7 @@ namespace ConsoleApp1
                     ]
                 },
     
-                ""objectWithArray"": {
+                ""objectWithArray2"": {
                     items: [
                     {
                         text: ""test 1""
@@ -40,8 +40,8 @@ namespace ConsoleApp1
 
             var jObject = JObject.Parse(testString);
 
-            // items array in obj will have 4 items
-            var obj = jObject.ToObject<DerivedObject>(serializer);
+            // items array in obj will have 4 items as [{"Text":"test 1"},{"Text":"test 2"},{"Text":"test 1"},{"Text":"test 2"}]
+            var obj = jObject.ToObject<RootObject>(serializer);
             
             Console.WriteLine(JsonConvert.SerializeObject(obj));            
 
